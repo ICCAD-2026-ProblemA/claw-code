@@ -1,0 +1,6 @@
+This is the beginning of testcase test2. Please output a copy of the log into test2.log.
+Read in design from test2.v in folder ‘testcases/test2/design/netlist/’
+Report all signals whose fanout is greater than 5.
+Insert buffer stages on high-fanout net en_buf so that no gate has fanout greater than 4, preserving functionality.
+Verify the functional equivalence between the original and modified design for data_out[0].
+Write out design to test2_out.v.

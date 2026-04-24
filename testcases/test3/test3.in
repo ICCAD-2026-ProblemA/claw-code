@@ -1,0 +1,5 @@
+This is the beginning of testcase test3. Please output a copy of the log into test3.log.
+Read in design from test3.v in folder ‘testcases/test3/design/netlist/’
+Remove any dangling gates and nets that do not affect any primary output.
+Replace all inverters followed by buffers with a single inverter, if this does not change functionality.
+Write out design to test3_out.v.

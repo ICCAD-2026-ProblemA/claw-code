@@ -1,0 +1,6 @@
+This is the beginning of testcase test1. Please output a copy of the log into test1.log.
+Read in design from test1.v in folder ‘testcases/test1/design/netlist/’
+What is the maximum logic depth from input a to output out1?
+Does every path from input d to output out2 pass through dff1?
+Replace all 2-input NAND gates with equivalent logic built only from AND and NOT gates.
+Write out design to test1_out.v.
