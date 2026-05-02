@@ -19,6 +19,8 @@ export PATH="/opt/oss-cad-suite/bin":$PATH
 export YOSYS_EXE=/opt/oss-cad-suite/bin/yosys
 export OPENROAD_EXE=/OpenROAD/build/bin/openroad
 
+export PATH="/opt/abc":$PATH
+
 cat /etc/motd
 
 export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$"

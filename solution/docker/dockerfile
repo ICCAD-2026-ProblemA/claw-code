@@ -5,8 +5,6 @@ SHELL ["/bin/bash", "-c"]
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/Los_Angeles
 
-COPY entrypoint.sh /opt/entrypoint.sh
-RUN chmod 777 /opt/entrypoint.sh
 
 COPY image_init.sh /opt
 RUN source /opt/image_init.sh
@@ -20,5 +18,12 @@ RUN source /opt/prep_clawcode.sh
 COPY prep_yosys.sh /opt
 RUN source /opt/prep_yosys.sh
 
+COPY prep_abc.sh /opt
+RUN source /opt/prep_abc.sh
+
 COPY motd.txt /etc/motd
+
+COPY entrypoint.sh /opt/entrypoint.sh
+RUN chmod 777 /opt/entrypoint.sh
+
 ENTRYPOINT ["/opt/entrypoint.sh"]
