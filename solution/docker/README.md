@@ -1,50 +1,76 @@
-# ICCAD26 Contest: Containers
+# ICCAD26 Contest: Environment Setup
 
-## Container
+## Overview
 
-The intention of this container is to provide a consistent interactive environment for development and evaluation. It is based on Ubuntu 24.04 and contains:
-- OpenROAD - Binary installation with sources at `/OpenROAD` (Commit `7559f9664a6561cc277e4ec8161b742573e7d521`)
-    - This version is patched to support the [evaluator](../scripts/evaluation.tcl), see [`ord.patch`](ord.patch) or [this repository](https://github.com/sakundu/OpenROAD/tree/ispd26) if you wish to build your own version.
-- OpenROAD-Flow-Scripts (commit `26b521c49218eb10f4274d782e420cdc824adbc3`)
-- Conda 25.7.0 (Miniconda)
-- Miscellaneous tools including Yosys, abc.
+This document describes the contest environment — a Docker container based on **Ubuntu 24.04** that provides a consistent setup for development and evaluation.
 
+---
 
-### future install list
-- conda env for the development with the api Openai or Anthropic
-- claw-code and rust
+## Container Contents
 
-- RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-- git clone https://github.com/ultraworkers/claw-code
-- cd claw-code/rust
-- cargo build --workspace
-- export ANTHROPIC_API_KEY="sk-ant-..."
+| Tool | Details |
+|---|---|
+| **OpenROAD** | Binary install; sources at `/OpenROAD` (commit `7559f9664a6561cc277e4ec8161b742573e7d521`). see [this repo](https://github.com/sakundu/OpenROAD/tree/ispd26) to build your own. |
+| **OpenROAD-Flow-Scripts** | Commit `26b521c49218eb10f4274d782e420cdc824adbc3` |
+| **Conda** | Version 25.7.0 (Miniconda) |
+| **Yosys** | Open-source logic synthesis tool |
+| **abc** | Sequential logic synthesis and verification |
 
-/model claude-haiku-4-5-20251001
+---
 
-# Docker Workflow
+## claw-code
 
-Use the prebuilt contest image to get a consistent ICCAD26 environment.
+`claw-code` is an LLM-assisted agent included in the container for contest tasks. To use it:
 
-## Quick start
 ```bash
-# from repo root
+cd /claw-code/rust
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# start to claw-code
+./target/debug/claw
+
+# change to haiku model
+/model claude-haiku-4-5-20251001
+```
+
+---
+
+## Docker Workflow
+
+### Quick Start
+
+From the repo root, run:
+
+```bash
 bash solution/docker/get_into_docker.sh
 ```
-This script runs:
-```
-docker run -it --rm -v ${PWD}:/ICCAD26-Contest cada-2:1.0
-```
-- `-it`: interactive shell.
-- `--rm`: container is removed on exit.
-- `-v ${PWD}:/ICCAD26-Contest`: mounts your repo into the container.
-- `cada-2:1.0`: contest image with required tooling on lab2312 server.
 
-## Manual run (if script not executable)
+This script runs the following command:
+
 ```bash
-docker run -it --rm -v "$(pwd)":/ICCAD26-Contest cada-2:1.0
+docker run -it --rm -v ${PWD}:/ICCAD26-Contest cada-2:1.2
 ```
+
+### Manual Run
+
+If the script is not executable, run directly:
+
+```bash
+docker run -it --rm -v "$(pwd)":/ICCAD26-Contest cada-2:1.2
+```
+
+### Docker Flag Reference
+
+| Flag | Description |
+|---|---|
+| `-it` | Opens an interactive shell |
+| `--rm` | Removes the container on exit |
+| `-v ${PWD}:/ICCAD26-Contest` | Mounts your local repo into the container |
+| `cada-2:1.2` | The contest image hosted on the `lab2312` server |
+
+---
 
 ## Notes
-- Work inside `/ICCAD26-Contest` in the container; changes persist to your host.
-- Exit the shell to stop and remove the container.
+
+- Do all your work inside `/ICCAD26-Contest` within the container — changes there will persist to your host machine.
+- Exit the shell to stop and remove the container automatically.
