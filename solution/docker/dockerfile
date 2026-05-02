@@ -14,5 +14,11 @@ COPY prep_or.sh /opt
 RUN source /opt/prep_or.sh
 
 
+COPY prep_clawcode.sh /opt
+RUN source /opt/prep_clawcode.sh
+
+COPY prep_yosys.sh /opt
+RUN source /opt/prep_yosys.sh
+
 COPY motd.txt /etc/motd
 ENTRYPOINT ["/opt/entrypoint.sh"]

@@ -1,0 +1,1 @@
+mv /oss-cad-suite /opt/oss-cad-suite

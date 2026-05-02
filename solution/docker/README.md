@@ -20,7 +20,7 @@ The intention of this container is to provide a consistent interactive environme
 - cargo build --workspace
 - export ANTHROPIC_API_KEY="sk-ant-..."
 
-
+/model claude-haiku-4-5-20251001
 
 # Docker Workflow
 
